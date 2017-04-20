@@ -1,14 +1,14 @@
-# require('capybara/rspec')
-# require('./app')
-# require('launchy')
-# Capybara.app = Sinatra::Application
-# set(:show_exceptions, false)
-#
-# describe('the rock paper scissors path', {:type => :feature}) do
-#   it('compares the users choices to see if player1 wins') do
-#     visit('/game')
-#     fill_in('play1', :with => 'rock')
-#     click_button('Who_Wins?')
-#     expect(page).to have_content('Player 1 wins!')
-#   end
-# end
+require('capybara/rspec')
+require('./app')
+require('launchy')
+Capybara.app = Sinatra::Application
+set(:show_exceptions, false)
+
+describe('the coin return', {:type => :feature}) do
+  it('asks for a number and returns the fewest number of coins and their type') do
+    visit('/')
+    fill_in('amount', :with => '11')
+    click_button('Coinify')
+    expect(page).to have_content('1 dimes 1 pennies')
+  end
+end
