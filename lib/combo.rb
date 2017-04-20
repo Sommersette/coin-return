@@ -3,6 +3,7 @@ class Fixnum
   define_method(:coin_return) do
     final_arr = []
     user_num = self
+    working_num = self
 
     quarter_back = 0
     dimebag_back = 0
@@ -16,14 +17,22 @@ class Fixnum
       1 => "pennies"
     }
 
-    if ((user_num / 5) >= 1)
-      nickel_back = (user_num / 5).floor()
-      final_arr.push(nickel_back.to_s)
-      final_arr.push(coin_hash[5])
+    if ((working_num / 10) >= 1)
+      dimebag_back = (user_num / 10).floor()
+      final_arr.push(dimebag_back.to_s)
+      final_arr.push(coin_hash[10])
+      working_num = (working_num - (dimebag_back * 10))
     end
 
-    if ((user_num % 5) > 0)
-      pennywise_back = (user_num % 5)
+    if ((working_num/ 5) >= 1)
+      nickel_back = (working_num / 5).floor()
+      final_arr.push(nickel_back.to_s)
+      final_arr.push(coin_hash[5])
+      working_num = (working_num - (nickel_back * 5))
+    end
+
+    if ((working_num % 5) > 0)
+      pennywise_back = (working_num % 5)
       final_arr.push(pennywise_back.to_s)
       final_arr.push(coin_hash[1])
     end
